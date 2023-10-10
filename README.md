@@ -52,9 +52,11 @@ The project also includes a Sudoku game generator that creates Sudoku puzzles wi
 ### Fetch Data by Model
 
 - `/data/<str:model>/`: 
-  - Method: GET
-  - Description: Fetches data records based on the specified model.
-  - Example: `/data/EasyLevel/` retrieves data for the `EasyLevel` model.
+  - Method: GET, POST
+  - Description:
+   1-Fetches data records based on the specified model.
+   2- send Participant data to each model
+  - Example: GET `/data/EasyLevel/` retrieves data for the `EasyLevel` model.
 
 ### Generate Sudoku Puzzle
 
