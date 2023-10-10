@@ -172,11 +172,5 @@ Copy code
 
 ## Contact
 
-- If you have any questions or need further assistance, you can contact me at [your_email@example.com].
-- GitHub: [Your GitHub Profile](https://github.com/yourusername)
-# Django REST API README
-
-
-
-and leverage its functionalities.
-
+- If you have any questions or need further assistance, you can contact me at [zyn6681@gmail.com].
+- GitHub: ((https://github.com/zainmo11/))
