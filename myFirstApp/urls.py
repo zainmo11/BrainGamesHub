@@ -20,8 +20,9 @@ from my_first_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('getdata/<str:model>/',views.FBA_LIST),
+    path('data/<str:model>/',views.FBA_LIST),
     path('generate_sudoku/<int:N>/<int:K>/', views.generate_sudoku),
     path('generate_equation/<str:level>/<int:num_parameters>/<int:num_digits>/', views.generate_equation),
     path('validate_answer/', views.validate_answer),
+    path('sodukuSolver/',views.sudokuSolver)
 ]

@@ -37,7 +37,7 @@ class MathEquation:
         else:
             raise ValueError("Invalid level. Use 'simple' or 'complex'.")
 
-        operands = [random.randint(1, 10 * int(self.num_of_digits)) for _ in range(self.num_of_parameters - 1)]
+        operands = [random.randint(1, 10 ** int(self.num_of_digits)) for _ in range(self.num_of_parameters - 1)]
 
         equation = f"{operands[0]}"
         for i in range(self.num_of_parameters - 1):
@@ -178,7 +178,7 @@ class Sudoku:
 #         print(f"Error: {e}")
 
 
-@require_http_methods(["GET"])
+@api_view(["GET"])
 def generate_sudoku(request, N, K):
     try:
         N = int(N)  # Size of the Sudoku grid (e.g., 9 for a 9x9 Sudoku)
@@ -186,16 +186,21 @@ def generate_sudoku(request, N, K):
 
         sudoku = Sudoku(N, K)
         sudoku.fillValues()
+        sudoku_prob = sudoku.mat
 
-        sudoku_grid = sudoku.mat  # Get the Sudoku grid as a list
-
-        # Convert the Sudoku grid to a JSON response
         response_data = {
-            "sudoku": sudoku_grid,
+
+            "sudoku_prob" :sudoku_prob,
         }
-        return JsonResponse(response_data)
+        return Response(response_data)
     except ValueError:
-        return JsonResponse({"error": "Invalid input"}, status=400)
+        return Response({"error": "Invalid input"}, status=400)
+
+
+
+
+
+
 
 @api_view(['GET', 'POST'])
 def FBA_LIST(request, model):
@@ -229,26 +234,29 @@ def FBA_LIST(request, model):
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@require_http_methods(["GET"])
+@api_view(['GET','POST'])
 def generate_equation(request, level, num_parameters, num_digits):
     try:
+        # Create a MathEquation instance
         math_equation = MathEquation(level, num_parameters, num_digits)
+
+        # Generate an equation using EquGenerator method
         equation = math_equation.EquGenerator()
 
         # Convert the equation to a JSON response
         response_data = {
             "equation": equation,
         }
-        return JsonResponse(response_data)
+        return Response(response_data)
     except ValueError:
-        return JsonResponse({"error": "Invalid input"}, status=400)
+        return Response({"error": "Invalid input"}, status=400)
 
-@require_http_methods(["POST"])
+
+@api_view(["POST"])
 def validate_answer(request):
     try:
-        data = json.loads(request.body)
-        equation = data.get('equation', '')
-        user_answer = data.get('user_answer', '')
+        equation = request.data.get('equation', '')
+        user_answer = request.data.get('user_answer', '')
 
         is_correct = MathEquation.validate_result(equation, user_answer)
 
@@ -256,9 +264,10 @@ def validate_answer(request):
         response_data = {
             "is_correct": is_correct,
         }
-        return JsonResponse(response_data)
+        return Response(response_data)
     except (ValueError, KeyError):
-        return JsonResponse({"error": "Invalid input"}, status=400)
+        return Response({"error": "Invalid input"}, status=400)
+
 
 def check_Participant_name(model, participant_name):
     user_exists = False
@@ -275,3 +284,50 @@ def check_Participant_name(model, participant_name):
         # Handle exceptions as needed (e.g., log the error)
         print(f"Error: {e}")
         return False
+
+
+def isSafe(grid, row, col, num):
+    for x in range(9):
+        if grid[row][x] == num:
+            return False
+    for x in range(9):
+        if grid[x][col] == num:
+            return False
+    startRow = row - row % 3
+    startCol = col - col % 3
+    for i in range(3):
+        for j in range(3):
+            if grid[i + startRow][j + startCol] == num:
+                return False
+    return True
+
+def solver(N,grid, row, col):
+    if row == N - 1 and col == N:
+        return True
+    if col == N:
+        row += 1
+        col = 0
+    if grid[row][col] > 0:
+        return solver(N,grid, row, col + 1)
+    for num in range(1, N + 1, 1):
+        if isSafe(grid, row, col, num):
+            grid[row][col] = num
+            if solver(N,grid, row, col + 1):
+                return True
+        grid[row][col] = 0
+    return False
+
+
+@api_view(["POST"])
+def sudokuSolver(request):
+    data = request.data
+    N = data.get('N', 9)  # Default to a 9x9 Sudoku grid if N is not provided
+    grid = data.get('grid', [])  # Sudoku grid as a list of lists
+    solved = solver(N, grid, 0,0)
+    try:
+        if solved:
+            return Response({'solved_grid': grid})
+        else:
+            return Response({'error': 'No solution found'}, status=400)
+    except Exception as e:
+        return Response({'error': str(e)}, status=400)
