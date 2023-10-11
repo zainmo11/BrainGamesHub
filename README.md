@@ -101,6 +101,28 @@ The project also includes a Sudoku game generator that creates Sudoku puzzles wi
     }
     ```
 
+### Check Participant Name
+
+/check_Participant_name/<str:model>/<str:participant_name>/:
+Method: GET
+
+- Description: Checks if a participant's name exists in a specified database model.
+
+- Parameters:
+
+model (string): The name of the database model to query.
+participant_name (string): The name of the participant to check for in the specified model.
+- Example:
+
+Request: /check_Participant_name/EasyLevel/John Doe/
+Response: True if the participant's name exists in the EasyLevel model. False if the participant's name does not exist or if an exception occurs.
+- Usage:
+
+To use the check_Participant_name function, make a GET request to the specified endpoint with the appropriate model and participant name.
+Error Handling:
+
+The function includes error handling to catch exceptions. If an exception occurs during the query, it will return False.
+
 ### Solve Sudoku Puzzle
 
 - `/sudokuSolver/`: 
@@ -142,6 +164,8 @@ The project also includes a Sudoku game generator that creates Sudoku puzzles wi
       ]
     }
     ```
+
+    
 
 ## Conclusion
 
