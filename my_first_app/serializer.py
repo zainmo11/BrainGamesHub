@@ -16,4 +16,3 @@ class HardLevel_serializers (serializers.ModelSerializer):
     class Meta:
         model = HardLevel
         fields = '__all__'
-

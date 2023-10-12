@@ -1,15 +1,10 @@
-import json
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.views.decorators.http import require_http_methods
 from my_first_app.models import EasyLevel, MediumLevel, HardLevel
 import random
 import math
-from django.db import IntegrityError
 from .serializer import EasyLevel_serializers, MediumLevel_serializers, HardLevel_serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status,filters
+from rest_framework import status
 
 
 class MathEquation:
@@ -67,6 +62,7 @@ class MathEquation:
             # Handle invalid equation or user_answer
             return False
 
+
 class Sudoku:
     def __init__(self, N, K):
         self.N = N
@@ -78,7 +74,7 @@ class Sudoku:
         self.mat = [[0 for _ in range(N)] for _ in range(N)]
 
     def fillValues(self):
-        # Fill the diagonal of SRN x SRN matrices
+        # Fill the diagonal with SRN x SRN matrices
         self.fillDiagonal()
 
         # Fill remaining blocks
@@ -190,16 +186,11 @@ def generate_sudoku(request, N, K):
 
         response_data = {
 
-            "sudoku_prob" :sudoku_prob,
+            "sudoku_prob": sudoku_prob,
         }
         return Response(response_data)
     except ValueError:
         return Response({"error": "Invalid input"}, status=400)
-
-
-
-
-
 
 
 @api_view(['GET', 'POST'])
@@ -208,7 +199,7 @@ def FBA_LIST(request, model):
         if request.method == "GET":
             if model == "EasyLevel":
                 users = EasyLevel.objects.all()
-                serializer = EasyLevel_serializers (users, many=True)
+                serializer = EasyLevel_serializers(users, many=True)
             elif model == "MediumLevel":
                 users = MediumLevel.objects.all()
                 serializer = MediumLevel_serializers(users, many=True)
@@ -234,7 +225,7 @@ def FBA_LIST(request, model):
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['GET','POST'])
+@api_view(['GET', 'POST'])
 def generate_equation(request, level, num_parameters, num_digits):
     try:
         # Create a MathEquation instance
@@ -301,18 +292,19 @@ def isSafe(grid, row, col, num):
                 return False
     return True
 
-def solver(N,grid, row, col):
+
+def solver(N, grid, row, col):
     if row == N - 1 and col == N:
         return True
     if col == N:
         row += 1
         col = 0
     if grid[row][col] > 0:
-        return solver(N,grid, row, col + 1)
+        return solver(N, grid, row, col + 1)
     for num in range(1, N + 1, 1):
         if isSafe(grid, row, col, num):
             grid[row][col] = num
-            if solver(N,grid, row, col + 1):
+            if solver(N, grid, row, col + 1):
                 return True
         grid[row][col] = 0
     return False
@@ -323,7 +315,7 @@ def sudokuSolver(request):
     data = request.data
     N = data.get('N', 9)  # Default to a 9x9 Sudoku grid if N is not provided
     grid = data.get('grid', [])  # Sudoku grid as a list of lists
-    solved = solver(N, grid, 0,0)
+    solved = solver(N, grid, 0, 0)
     try:
         if solved:
             return Response({'solved_grid': grid})

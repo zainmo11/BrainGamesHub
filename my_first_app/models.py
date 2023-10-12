@@ -15,5 +15,3 @@ class HardLevel(models.Model):
     Participant_Name = models.CharField(max_length=50)
     Submission_Time = models.DateTimeField()
     Score = models.IntegerField()
-
-
