@@ -76,17 +76,27 @@ WSGI_APPLICATION = 'myFirstApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'rating_users',
+#         'USER': 'APP',
+#         'PASSWORD': '112233',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rating_users',
-        'USER': 'APP',
-        'PASSWORD': '112233',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'C79GEPbtwGdipGajzy1j',
+        'HOST': 'containers-us-west-179.railway.app',
+        'PORT': '7446',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
