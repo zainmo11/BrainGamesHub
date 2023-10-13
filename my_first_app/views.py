@@ -5,7 +5,7 @@ from .serializer import EasyLevel_serializers, MediumLevel_serializers, HardLeve
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-
+from django.shortcuts import render
 
 class MathEquation:
     simple_operations = ['+', '-']
@@ -323,3 +323,6 @@ def sudokuSolver(request):
             return Response({'error': 'No solution found'}, status=400)
     except Exception as e:
         return Response({'error': str(e)}, status=400)
+
+def hello_user_view(request):
+    return render(request, 'templates/hello_user.html')

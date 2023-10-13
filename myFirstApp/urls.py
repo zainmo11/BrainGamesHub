@@ -19,6 +19,7 @@ from django.urls import path, include
 from my_first_app import views
 
 urlpatterns = [
+    path('', views.hello_user_view, name='hello_user'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('data/<str:model>/', views.FBA_LIST),
