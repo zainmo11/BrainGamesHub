@@ -1,4 +1,7 @@
 # BrainGamesHub
+
+### link :  https://braingameshub-production.up.railway.app/ 
+
 # Django Sudoku Game and Database API
 
 This Django project combines a Sudoku game generator, solver, and a database API for storing participant data across different game levels. It includes three database models: EasyLevel, MediumLevel, and HardLevel, each designed to store participant names, submission times, and scores for different levels of the game.
