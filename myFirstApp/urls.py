@@ -26,5 +26,5 @@ urlpatterns = [
     path('generate_sudoku/<int:N>/<int:K>/', views.generate_sudoku),
     path('generate_equation/<str:level>/<int:num_parameters>/<int:num_digits>/', views.generate_equation),
     path('validate_answer/', views.validate_answer),
-    path('sodukuSolver/', views.sudokuSolver)
+    path('sodokuSolver/', views.sudokuSolver)
 ]
