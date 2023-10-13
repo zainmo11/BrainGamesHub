@@ -325,4 +325,4 @@ def sudokuSolver(request):
         return Response({'error': str(e)}, status=400)
 
 def hello_user_view(request):
-    return render(request, 'templates/hello_user.html')
+    return render(request, 'MyFirstApp/hello_user.html')
