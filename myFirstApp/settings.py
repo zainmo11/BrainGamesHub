@@ -27,7 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['braingameshub-production.up.railway.app']
 
+CSRF_TRUSTED_ORIGINS = ['https://braingameshub-production.up.railway.app']
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'Strict'
 # Application definition
 
 INSTALLED_APPS = [
