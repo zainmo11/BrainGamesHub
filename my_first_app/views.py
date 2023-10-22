@@ -1,8 +1,11 @@
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 from my_first_app.models import EasyLevel, MediumLevel, HardLevel
 import random
 import math
 from .serializer import EasyLevel_serializers, MediumLevel_serializers, HardLevel_serializers
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import render
@@ -175,11 +178,12 @@ class Sudoku:
 
 
 @api_view(["GET"])
+@authentication_classes([TokenAuthentication])
+@permission_classes((IsAuthenticated,))
 def generate_sudoku(request, N, K):
     try:
         N = int(N)  # Size of the Sudoku grid (e.g., 9 for a 9x9 Sudoku)
         K = int(K)  # Number of digits to be removed
-
         sudoku = Sudoku(N, K)
         sudoku.fillValues()
         sudoku_prob = sudoku.mat
@@ -194,6 +198,8 @@ def generate_sudoku(request, N, K):
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes((IsAuthenticated,))
 def FBA_LIST(request, model):
     try:
         if request.method == "GET":
@@ -226,6 +232,8 @@ def FBA_LIST(request, model):
 
 
 @api_view(['GET', 'POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes((IsAuthenticated,))
 def generate_equation(request, level, num_parameters, num_digits):
     try:
         # Create a MathEquation instance
@@ -244,6 +252,8 @@ def generate_equation(request, level, num_parameters, num_digits):
 
 
 @api_view(["POST"])
+@authentication_classes([TokenAuthentication])
+@permission_classes((IsAuthenticated,))
 def validate_answer(request):
     try:
         equation = request.data.get('equation', '')
@@ -311,6 +321,8 @@ def solver(N, grid, row, col):
 
 
 @api_view(["POST"])
+@authentication_classes([TokenAuthentication])
+@permission_classes((IsAuthenticated,))
 def sudokuSolver(request):
     data = request.data
     N = data.get('N', 9)  # Default to a 9x9 Sudoku grid if N is not provided

@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.authtoken.views import obtain_auth_token
+
 from my_first_app import views
 
 urlpatterns = [
@@ -26,5 +28,6 @@ urlpatterns = [
     path('generate_sudoku/<int:N>/<int:K>/', views.generate_sudoku),
     path('generate_equation/<str:level>/<int:num_parameters>/<int:num_digits>/', views.generate_equation),
     path('validate_answer/', views.validate_answer),
-    path('sudokuSolver/', views.sudokuSolver)
+    path('sudokuSolver/', views.sudokuSolver),
+    path('api_token/', obtain_auth_token),
 ]
