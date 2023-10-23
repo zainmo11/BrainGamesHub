@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-x6+8at=6jgs)b4y(u!43pd%+t-s7xt(8b10ogmv-k*3-jr95$r
 DEBUG = True
 
 CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ['braingameshub-production.up.railway.app','http://localhost:4200/']
+ALLOWED_HOSTS = ['braingameshub-production.up.railway.app', 'http://localhost:4200/']
 #
 # CSRF_TRUSTED_ORIGINS = ['https://braingameshub-production.up.railway.app']
 #
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'my_first_app.apps.MyFirstAppConfig',
     'rest_framework',
     'rest_framework.authtoken',
@@ -60,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
