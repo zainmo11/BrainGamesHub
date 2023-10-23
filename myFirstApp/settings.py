@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-x6+8at=6jgs)b4y(u!43pd%+t-s7xt(8b10ogmv-k*3-jr95$r
 DEBUG = True
 
 CORS_ALLOW_ALL_ORIGINS = True
-ALLOWED_HOSTS = ['braingameshub-production.up.railway.app', 'http://localhost:4200/']
+ALLOWED_HOSTS = []
 #
 # CSRF_TRUSTED_ORIGINS = ['https://braingameshub-production.up.railway.app']
 #
