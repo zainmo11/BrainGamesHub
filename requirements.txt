@@ -1,4 +1,4 @@
-﻿anyio==3.6.2
+anyio==3.6.2
 asgiref==3.7.2
 attrs==23.1.0
 beautifulsoup4==4.12.2
@@ -28,7 +28,7 @@ moviepy==1.0.3
 numpy==1.24.2
 outcome==1.2.0
 packaging==23.2
-Pillow==9.4.0
+Pillow==10.0.1
 proglog==0.1.10
 psycopg2-binary==2.9.5
 pycparser==2.21
