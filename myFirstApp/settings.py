@@ -25,13 +25,14 @@ SECRET_KEY = 'django-insecure-x6+8at=6jgs)b4y(u!43pd%+t-s7xt(8b10ogmv-k*3-jr95$r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ['braingameshub-production.up.railway.app','http://localhost:4200/']
-
-CSRF_TRUSTED_ORIGINS = ['https://braingameshub-production.up.railway.app']
-
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'Strict'
+#
+# CSRF_TRUSTED_ORIGINS = ['https://braingameshub-production.up.railway.app']
+#
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SAMESITE = 'Strict'
 # Application definition
 
 INSTALLED_APPS = [
