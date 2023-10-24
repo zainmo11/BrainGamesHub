@@ -31,7 +31,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
 ]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 #
 # CSRF_TRUSTED_ORIGINS = ['https://braingameshub-production.up.railway.app']
 #
