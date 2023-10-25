@@ -21,13 +21,13 @@ class MathEquation:
         self.num_of_digits = num_of_digits
 
     def EquGenerator(self):
-        if self.levels == "simple":
+        if self.levels == "EasyLevel":
             # Choose a simple operation (+, -)
             equation_operations = random.choices(self.simple_operations, k=self.num_of_parameters)
-        elif self.levels == "medium":
+        elif self.levels == "MediumLevel":
             # Choose a medium operation (*, /)
             equation_operations = random.choices(self.medium_operations, k=self.num_of_parameters)
-        elif self.levels == "hard":
+        elif self.levels == "HardLevel":
             # Choose a hard operation (**)
             equation_operations = random.choices(self.hard_operations, k=self.num_of_parameters)
         else:
