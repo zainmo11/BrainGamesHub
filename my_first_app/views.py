@@ -39,7 +39,7 @@ class MathEquation:
         random.shuffle(operands)
 
         equation = f"{operands[0]}"
-        for i in range(1,self.num_of_parameters - 1):
+        for i in range(1,self.num_of_parameters):
             equation += f" {equation_operations[i]} {operands[i]}"
 
         return equation
