@@ -284,12 +284,12 @@ def check_Participant_name(request):
             user_exists = MediumLevel.objects.filter(Participant_Name=participant_name).exists()
         elif model == "HardLevel":
             user_exists = HardLevel.objects.filter(Participant_Name=participant_name).exists()
-        return user_exists
-    except Exception as e:
-        # Handle exceptions as needed (e.g., log the error)
-        print(f"Error: {e}")
-        return False
-
+            response_data = {
+                "user_exists": user_exists,
+            }
+            return Response(response_data)
+    except (ValueError, KeyError):
+        return Response({"error": "Invalid input"}, status=400)
 
 def isSafe(grid, row, col, num):
     for x in range(9):
