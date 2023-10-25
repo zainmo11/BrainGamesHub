@@ -270,7 +270,9 @@ def validate_answer(request):
     except (ValueError, KeyError):
         return Response({"error": "Invalid input"}, status=400)
 
-
+@api_view(["POST"])
+@authentication_classes([TokenAuthentication])
+@permission_classes((IsAuthenticated,))
 def check_Participant_name(request):
 
     user_exists = False
