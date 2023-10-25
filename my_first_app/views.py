@@ -271,9 +271,12 @@ def validate_answer(request):
         return Response({"error": "Invalid input"}, status=400)
 
 
-def check_Participant_name(model, participant_name):
+def check_Participant_name(request):
+
     user_exists = False
     try:
+        model = request.data.get('model')
+        participant_name = request.data.get('participant_name')
         # Query the model to check if the participant_name exists
         if model == "EasyLevel":
             user_exists = EasyLevel.objects.filter(Participant_Name=participant_name).exists()
