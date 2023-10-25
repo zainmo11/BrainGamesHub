@@ -30,5 +30,5 @@ urlpatterns = [
     path('validate_answer/', views.validate_answer),
     path('sudokuSolver/', views.sudokuSolver),
     path('api_token/', obtain_auth_token),
-    path('check_part', views.check_Participant_name)
+    path('check_part/', views.check_Participant_name)
 ]
