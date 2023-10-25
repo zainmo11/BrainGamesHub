@@ -26,16 +26,17 @@ class MathEquation:
             equation_operations = random.choices(self.simple_operations, k=self.num_of_parameters)
         elif self.levels == "medium":
             # Choose a medium operation (*, /)
-            equation_operations = random.choices(self.medium_operations,
-                                                 k=self.num_of_parameters)  # Generate random operands
+            equation_operations = random.choices(self.medium_operations, k=self.num_of_parameters)
         elif self.levels == "hard":
             # Choose a hard operation (**)
-            equation_operations = random.choices(self.hard_operations,
-                                                 k=self.num_of_parameters)  # Generate random operands
+            equation_operations = random.choices(self.hard_operations, k=self.num_of_parameters)
         else:
             raise ValueError("Invalid level. Use 'simple' or 'complex'.")
 
         operands = [random.randint(1, 10 ** int(self.num_of_digits)) for _ in range(self.num_of_parameters - 1)]
+
+        # Ensure unique operands by shuffling
+        random.shuffle(operands)
 
         equation = f"{operands[0]}"
         for i in range(self.num_of_parameters - 1):
