@@ -286,10 +286,10 @@ def check_Participant_name(request):
             user_exists = MediumLevel.objects.filter(Participant_Name=participant_name).exists()
         elif model == "HardLevel":
             user_exists = HardLevel.objects.filter(Participant_Name=participant_name).exists()
-            response_data = {
-                "user_exists": user_exists,
-            }
-            return Response(response_data)
+        response_data = {
+            "user_exists": user_exists,
+        }
+        return Response(response_data)
     except (ValueError, KeyError):
         return Response({"error": "Invalid input"}, status=400)
 
