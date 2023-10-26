@@ -277,15 +277,10 @@ def check_Participant_name(request):
 
     user_exists = False
     try:
-        model = request.data.get('model')
         participant_name = request.data.get('participant_name')
         # Query the model to check if the participant_name exists
-        if model == "EasyLevel":
-            user_exists = EasyLevel.objects.filter(Participant_Name=participant_name).exists()
-        elif model == "MediumLevel":
-            user_exists = MediumLevel.objects.filter(Participant_Name=participant_name).exists()
-        elif model == "HardLevel":
-            user_exists = HardLevel.objects.filter(Participant_Name=participant_name).exists()
+        if EasyLevel.objects.filter(Participant_Name=participant_name).exists() | MediumLevel.objects.filter(Participant_Name=participant_name).exists() | HardLevel.objects.filter(Participant_Name=participant_name).exists():
+            user_exists = True
         response_data = {
             "user_exists": user_exists,
         }
