@@ -5,13 +5,14 @@ class EasyLevel(models.Model):
     Participant_Name = models.CharField(max_length=50)
     Submission_Time = models.DateTimeField()
     Score = models.IntegerField()
-
+    level_params_digits = models.CharField(max_length=50)
 class MediumLevel(models.Model):
     Participant_Name = models.CharField(max_length=50)
     Submission_Time = models.DateTimeField()
     Score = models.IntegerField()
-
+    level_params_digits = models.CharField(max_length=50)
 class HardLevel(models.Model):
     Participant_Name = models.CharField(max_length=50)
     Submission_Time = models.DateTimeField()
     Score = models.IntegerField()
+    level_params_digits = models.CharField(max_length=50)
