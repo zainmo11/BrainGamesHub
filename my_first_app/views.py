@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from my_first_app.models import EasyLevel, MediumLevel, HardLevel
 import random
 import math
-from .serializer import *
+from .serializer import EasyLevel_serializers, MediumLevel_serializers, HardLevel_serializers
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -213,9 +213,6 @@ def FBA_LIST(request, model):
             elif model == "HardLevel":
                 users = HardLevel.objects.all()
                 serializer = HardLevel_serializers(users, many=True)
-            else:
-                users = EasyLevel.objects.all() | MediumLevel.objects.all() | HardLevel.objects.all()
-                serializer = AllDataSerializer(users, many=True)
             return Response(serializer.data)
         elif request.method == "POST":
             if model == "EasyLevel":
