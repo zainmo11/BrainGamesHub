@@ -225,7 +225,7 @@ def FBA_LIST(request, model):
                     Participant_Name=participant,
                     Submission_Time=Submission_Time,
                     Score=Score,
-                    level_params_digits=level_params_digits
+                    level_params_digits=level_params_digits,
                 )
                 participant.save()  # Save the object to the database
 
@@ -256,7 +256,7 @@ def FBA_LIST(request, model):
     except Exception as e:
         # Handle exceptions as needed (e.g., log the error)
         print(f"Error: {e}")
-        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(e,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['GET', 'POST'])
