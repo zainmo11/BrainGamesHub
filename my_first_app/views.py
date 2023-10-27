@@ -215,36 +215,44 @@ def FBA_LIST(request, model):
                 serializer = HardLevel_serializers(users, many=True)
             return Response(serializer.data)
         elif request.method == "POST":
-            data = request.data
+            participant = request.data.get("Participant_Name")
+            Submission_Time = request.data.get("Submission_Time")
+            Score = request.data.get("Score")
+            level_params_digits = request.data.get("level_params_digits")
 
             if model == "EasyLevel":
                 participant = EasyLevel(
-                    Participant_Name=data["Participant_Name"],
-                    Submission_Time=data["Submission_Time"],
-                    Score=data["Score"],
-                    level_params_digits=data["level_params_digits"]
+                    Participant_Name=participant,
+                    Submission_Time=Submission_Time,
+                    Score=Score,
+                    level_params_digits=level_params_digits
                 )
-
-            elif model == "MediumLevel":
-                participant = MediumLevel(
-                    Participant_Name=data["Participant_Name"],
-                    Submission_Time=data["Submission_Time"],
-                    Score=data["Score"],
-                    level_params_digits=data["level_params_digits"]
-                )
-
-            elif model == "HardLevel":
-                participant = HardLevel(
-                    Participant_Name=data["Participant_Name"],
-                    Submission_Time=data["Submission_Time"],
-                    Score=data["Score"],
-                    level_params_digits=data["level_params_digits"]
-                )
-
-            participant.save()  # Save the object to the database
+                participant.save()  # Save the object to the database
 
                 # You can return a response indicating success
-            return Response({"message": "Participant created successfully"}, status=201)
+                return Response({"message": "Participant created successfully"}, status=201)
+            elif model == "MediumLevel":
+                participant = MediumLevel(
+                    Participant_Name=participant,
+                    Submission_Time=Submission_Time,
+                    Score=Score,
+                    level_params_digits=level_params_digits
+                )
+                participant.save()  # Save the object to the database
+
+                # You can return a response indicating success
+                return Response({"message": "Participant created successfully"}, status=201)
+            elif model == "HardLevel":
+                participant = HardLevel(
+                    Participant_Name=participant,
+                    Submission_Time=Submission_Time,
+                    Score=Score,
+                    level_params_digits=level_params_digits
+                )
+                participant.save()  # Save the object to the database
+
+                # You can return a response indicating success
+                return Response({"message": "Participant created successfully"}, status=201)
     except Exception as e:
         # Handle exceptions as needed (e.g., log the error)
         print(f"Error: {e}")
