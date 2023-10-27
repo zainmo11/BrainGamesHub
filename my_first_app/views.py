@@ -215,17 +215,36 @@ def FBA_LIST(request, model):
                 serializer = HardLevel_serializers(users, many=True)
             return Response(serializer.data)
         elif request.method == "POST":
-            if model == "EasyLevel":
-                serializer = EasyLevel_serializers(data=request.data)
-            elif model == "MediumLevel":
-                serializer = MediumLevel_serializers(data=request.data)
-            elif model == "HardLevel":
-                serializer = HardLevel_serializers(data=request.data)
+            data = request.data
 
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            if model == "EasyLevel":
+                participant = EasyLevel(
+                    Participant_Name=data["Participant_Name"],
+                    Submission_Time=data["Submission_Time"],
+                    Score=data["Score"],
+                    level_params_digits=data["level_params_digits"]
+                )
+
+            elif model == "MediumLevel":
+                participant = MediumLevel(
+                    Participant_Name=data["Participant_Name"],
+                    Submission_Time=data["Submission_Time"],
+                    Score=data["Score"],
+                    level_params_digits=data["level_params_digits"]
+                )
+
+            elif model == "HardLevel":
+                participant = HardLevel(
+                    Participant_Name=data["Participant_Name"],
+                    Submission_Time=data["Submission_Time"],
+                    Score=data["Score"],
+                    level_params_digits=data["level_params_digits"]
+                )
+
+            participant.save()  # Save the object to the database
+
+                # You can return a response indicating success
+            return Response({"message": "Participant created successfully"}, status=201)
     except Exception as e:
         # Handle exceptions as needed (e.g., log the error)
         print(f"Error: {e}")
