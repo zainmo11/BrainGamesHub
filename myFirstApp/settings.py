@@ -27,9 +27,9 @@ DEBUG = False
 
 # CORS_ALLOW_ALL_ORIGINS = True
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:4200',
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'https://mathgridchallenger-production-4f82.up.railway.app/',
+]
 
 ALLOWED_HOSTS = ["braingameshub-production-d150.up.railway.app"]
 #
